@@ -12,13 +12,14 @@ public class Candy : MonoBehaviour
     public Material normalMaterial;
     public Material mysteryMaterial;
 
+    public GameObject visual;
     private Renderer candyRenderer;
     private CandyLayer currentLayer;
     private bool isMoving = false;
 
     void Awake()
     {
-        candyRenderer = GetComponent<Renderer>();
+        candyRenderer = visual.GetComponent<Renderer>();
     }
 
     public void SetColor(CandyColor color)
