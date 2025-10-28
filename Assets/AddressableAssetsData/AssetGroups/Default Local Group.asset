@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_GUID: dd41f80c981209747b1fd84c45e491e8
+  m_SerializeEntries:
+  - m_GUID: 1d1c77ff477074b49a7e748870e7c0ab
+    m_Address: Assets/_Project/SO/Level_20.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 254d8d023010a7545b83c166cd9da36f
+    m_Address: Assets/_Project/SO/Level_6.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2d9a01e93b5ab5d4da1e67625ea47e0c
+    m_Address: Assets/_Project/SO/Level_2.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2e2c9cf6d41f784489ea26fa67dc81e1
+    m_Address: Assets/_Project/SO/Level_7.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 362ad55cb67569243bb83c2c1f4a0d35
+    m_Address: Assets/_Project/SO/Level_13.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 42bcccec195af66428ec137e87e6aae7
+    m_Address: Assets/_Project/SO/Level_15.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4397833325049294d97aae1349057197
+    m_Address: Assets/_Project/SO/Level_1.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5213a8d7ea0e6cf409ea5ab9ffb687f7
+    m_Address: Assets/_Project/SO/Level_9.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5eecbd5e2c9c3e04d89cc8f0e5a8355a
+    m_Address: Assets/_Project/SO/Level_17.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e17b0892feaa0842a3664f8b142724d
+    m_Address: Assets/_Project/SO/Level_8.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 76200be3e8ab81846b0d12e2b0fb4a93
+    m_Address: Assets/_Project/SO/Level_12.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 86ed26750ccdd134383c4c41fff27d77
+    m_Address: Assets/_Project/SO/Level_14.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8ab60195c18df3440acdc29b7e60b6b6
+    m_Address: Assets/_Project/SO/Level_18.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8c875b7517fa42f4eb388e589643c6b1
+    m_Address: Assets/_Project/SO/Level_11.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8e3207317506d7c47a8dc2361eae3c4f
+    m_Address: Assets/_Project/SO/Level_5.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9590698bf2c82c14abe1b0c1fdac61fb
+    m_Address: Assets/_Project/SO/Level_4.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9bab9531336396545b983098d7223a17
+    m_Address: Assets/_Project/SO/Level_3.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ad421b430ad7e834694dda88a37ee7b0
+    m_Address: Assets/_Project/SO/Level_19.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e4a22758c277c2648bfc01fe3720c30f
+    m_Address: Assets/_Project/SO/Level_16.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eddd5a453e2ea8541b08eaad7330b83d
+    m_Address: Assets/_Project/SO/Level_10.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: ac34e439715931645979276b29013826, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: e06fa1f4eb545c2478226bc69e6b08e0, type: 2}
+    - {fileID: 11400000, guid: 62bf4c3b78b062b41af52ac3ca5b56e2, type: 2}

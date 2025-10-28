@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
     private bool hasBezierCurve = false;
 
     private InputController inputController;
+    private LevelGenerator levelGenerator;
     void Awake()
     {
         if (Instance == null)
@@ -33,6 +35,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         inputController = GetComponent<InputController>();
+        levelGenerator = GetComponent<LevelGenerator>();
     }
 
     void Start()
@@ -40,10 +43,10 @@ public class GameManager : MonoBehaviour
         InitializeLevel();
     }
 
-    void InitializeLevel()
+    public void InitializeLevel()
     {
-        // Example level setup - customize as needed
-        // This would typically be loaded from a level configuration
+        UIManager.Instance.StartGame();
+        levelGenerator.InitializeLevel();
     }
 
     public void OnTubeClicked(Tube tube)
@@ -114,7 +117,7 @@ public class GameManager : MonoBehaviour
         CandyLayer firstLayer = movingLayers[0];
 
         // Check if target tube can receive layers
-        if (toTube.GetLayerCount() + movingLayers.Count > toTube.maxLayers)
+        if (toTube.GetLayerCount() >= toTube.maxLayers)
             return false;
 
         // Check if tube is empty or has matching top color
@@ -163,6 +166,18 @@ public class GameManager : MonoBehaviour
     {
         isAnimating = true;
 
+        // Calculate how many layers can actually move
+        int spaceAvailable = toTube.maxLayers - toTube.GetLayerCount();
+        int layersToMove = Mathf.Min(movingLayers.Count, spaceAvailable);
+
+        // Take only the layers that can fit (from the top)
+        List<CandyLayer> actualMovingLayers = new();
+        for (int i = 0; i < layersToMove; i++)
+        {
+            actualMovingLayers.Add(movingLayers[i]);
+        }
+        movingLayers.Clear();
+        movingLayers = actualMovingLayers;
         // Remove layers from source
         fromTube.RemoveLayers(movingLayers);
 
@@ -189,7 +204,7 @@ public class GameManager : MonoBehaviour
         hasBezierCurve = true;
     }
 
-    private System.Collections.IEnumerator AnimateLayersMovement(List<CandyLayer> layers, Tube from, Tube to, bool useBezier)
+    private IEnumerator AnimateLayersMovement(List<CandyLayer> layers, Tube from, Tube to, bool useBezier)
     {
         int completedAnimations = 0;
 
@@ -328,11 +343,22 @@ public class GameManager : MonoBehaviour
     private void OnLevelComplete()
     {
         Debug.Log("Level Complete!");
+
+        levelGenerator.currentLevelID++;
+        PlayerPrefs.SetInt("CurrentLevelID", levelGenerator.currentLevelID);
+
+        // Stop timer
+        if (TimeManager.Instance != null)
+        {
+            TimeManager.Instance.StopTimer();
+        }
+
+        UIManager.Instance.ShowWinPanel();
     }
 
-    public Tube CreateTube(Vector3 position)
+    public Tube CreateTube(GameObject prefab, Vector3 position)
     {
-        GameObject tubeObj = Instantiate(tubePrefab, position, Quaternion.identity);
+        GameObject tubeObj = Instantiate(prefab, position, Quaternion.identity);
         Tube tube = tubeObj.GetComponent<Tube>();
         tube.candyLayerPrefab = candyLayerPrefab;
         tubes.Add(tube);

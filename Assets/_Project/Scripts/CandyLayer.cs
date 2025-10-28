@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -80,7 +81,7 @@ public class CandyLayer : MonoBehaviour
         StartCoroutine(RevealColorGraduallyCoroutine());
     }
 
-    private System.Collections.IEnumerator RevealColorGraduallyCoroutine()
+    private IEnumerator RevealColorGraduallyCoroutine()
     {
         if (!isMystery)
             yield break;
@@ -127,7 +128,7 @@ public class CandyLayer : MonoBehaviour
         StartCoroutine(AnimateAlongBezierCurveCoroutine(bezierStart, bezierControl1, bezierControl2, bezierEnd, targetWorldPosition, onComplete));
     }
 
-    private System.Collections.IEnumerator AnimateAlongBezierCurveCoroutine(Vector3 bezierStart, Vector3 bezierControl1, Vector3 bezierControl2, Vector3 bezierEnd, Vector3 targetWorldPosition, System.Action onComplete)
+    private IEnumerator AnimateAlongBezierCurveCoroutine(Vector3 bezierStart, Vector3 bezierControl1, Vector3 bezierControl2, Vector3 bezierEnd, Vector3 targetWorldPosition, System.Action onComplete)
     {
         int completedCandies = 0;
 

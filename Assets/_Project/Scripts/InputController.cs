@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InputController : MonoBehaviour
 {
@@ -65,6 +66,7 @@ public class InputController : MonoBehaviour
 
     private void HandleInput()
     {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         // Handle both mouse and touch input
         if (Input.GetMouseButtonDown(0))
         {
@@ -109,6 +111,8 @@ public class InputController : MonoBehaviour
             Tube tube = hit.collider.GetComponent<Tube>();
             if (tube != null)
             {
+                dragLineRendererStraight.positionCount = 2;
+
                 dragStartPos = screenPosition;
                 dragStartTube = tube;
                 isDragging = true;
@@ -173,7 +177,7 @@ public class InputController : MonoBehaviour
                 // Second click on target tube
                 GameManager.Instance.OnTubeClicked(targetTube);
 
-                // Don't clear the line yet - GameManager will do it after animation
+                ClearDragLine(); // Comment this to wait for GameManager to clear drag line after animation
             }
             else
             {
@@ -329,7 +333,7 @@ public class InputController : MonoBehaviour
             return false;
 
         // Check if target can receive
-        if (toTube.GetLayerCount() + movableLayers.Count > toTube.maxLayers)
+        if (toTube.GetLayerCount() >= toTube.maxLayers)
             return false;
 
         // Check color matching
@@ -353,6 +357,7 @@ public class InputController : MonoBehaviour
     {
         if (dragLineRendererStraight != null)
         {
+            dragLineRendererStraight.positionCount = 0;
             dragLineRendererStraight.enabled = false;
         }
     }

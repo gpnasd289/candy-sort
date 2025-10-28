@@ -27,12 +27,6 @@ public class PathValidator : MonoBehaviour
         Vector3 start = fromTube.transform.position;
         Vector3 end = toTube.transform.position;
 
-        // Check if it's a straight line path
-        if (!IsStraightPath(start, end))
-        {
-            return false;
-        }
-
         // Check for blocking objects along the path
         return !IsPathBlocked(start, end, fromTube, toTube);
     }

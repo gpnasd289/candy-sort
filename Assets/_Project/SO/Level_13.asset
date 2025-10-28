@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1c791e8f4beabc4b9b564c99f7e9450, type: 3}
+  m_Name: Level_13
+  m_EditorClassIdentifier: 
+  levelNumber: 13
+  levelName: Level 13
+  levelDescription: 
+  targetMoves: 0
+  timeLimit: 0
+  tubes:
+  - tubePrefab: {fileID: 3830228103646547994, guid: 6e234a0feafc23244a54a8113c7955a4, type: 3}
+    position: {x: -0.5, y: 0, z: 3}
+    layers:
+    - color: 3
+      isMystery: 0
+    - color: 3
+      isMystery: 0
+  - tubePrefab: {fileID: 3830228103646547994, guid: 6e234a0feafc23244a54a8113c7955a4, type: 3}
+    position: {x: 0, y: 0, z: 1}
+    layers:
+    - color: 2
+      isMystery: 0
+    - color: 2
+      isMystery: 0
+    - color: 3
+      isMystery: 0
+    - color: 3
+      isMystery: 0
+  - tubePrefab: {fileID: 3830228103646547994, guid: 6e234a0feafc23244a54a8113c7955a4, type: 3}
+    position: {x: -1, y: 0, z: -1}
+    layers:
+    - color: 4
+      isMystery: 0
+    - color: 4
+      isMystery: 0
+    - color: 3
+      isMystery: 1
+    - color: 3
+      isMystery: 1
+    - color: 2
+      isMystery: 0
+    - color: 2
+      isMystery: 0
+  - tubePrefab: {fileID: 3830228103646547994, guid: 6e234a0feafc23244a54a8113c7955a4, type: 3}
+    position: {x: 1, y: 0, z: -2}
+    layers:
+    - color: 4
+      isMystery: 1
+    - color: 4
+      isMystery: 1
+    - color: 0
+      isMystery: 0
+    - color: 0
+      isMystery: 0
+    - color: 0
+      isMystery: 0
+    - color: 0
+      isMystery: 0
+  - tubePrefab: {fileID: 3830228103646547994, guid: 6e234a0feafc23244a54a8113c7955a4, type: 3}
+    position: {x: -1, y: 0, z: -3}
+    layers:
+    - color: 0
+      isMystery: 0
+    - color: 0
+      isMystery: 0
+    - color: 4
+      isMystery: 1
+    - color: 4
+      isMystery: 1
+    - color: 2
+      isMystery: 0
+    - color: 2
+      isMystery: 0
+  blocks: []

@@ -28,8 +28,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 9.97, y: 9.97, z: 9.97}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1694307391618459521}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -58,10 +58,13 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8748892135801146194, guid: 3a0696a09781f3e4dbe0509449e172f7, type: 3}
+  - {fileID: 2100000, guid: 21bf789e0269d4742a4773986d63e184, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,7 +98,7 @@ GameObject:
   - component: {fileID: 86364957536818820}
   - component: {fileID: 8051823642111861418}
   m_Layer: 6
-  m_Name: Tube
+  m_Name: Tube7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,8 +134,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tubeType: 0
   maxLayers: 7
-  layerSpacing: 0.015
-  layerContainer: {fileID: 5800523623455921981}
+  layerSpacing: 0.15
+  layerContainer: {fileID: 1694307391618459521}
   candyLayerPrefab: {fileID: 217045152338267198, guid: 6c983dbefd8482c4cbf248617172bc00, type: 3}
 --- !u!136 &8051823642111861418
 CapsuleCollider:

@@ -23,6 +23,7 @@ public class LevelConfig : ScriptableObject
     [System.Serializable]
     public class TubeData
     {
+        public GameObject tubePrefab;
         public Vector3 position = Vector3.zero;
         public List<LayerData> layers = new List<LayerData>();
     }

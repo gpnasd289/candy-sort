@@ -1,13 +1,17 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class LevelGenerator : MonoBehaviour
 {
     public static LevelGenerator Instance { get; private set; }
 
     [Header("Level Configuration")]
+    public bool levelDebug = false;
     public LevelConfig currentLevel;
-    public List<LevelConfig> allLevels = new List<LevelConfig>();
+    public int currentLevelID = 1;
 
     [Header("Prefab References")]
     public GameObject blockPrefabStandard;
@@ -15,7 +19,6 @@ public class LevelGenerator : MonoBehaviour
     public GameObject blockPrefabSmall;
     public GameObject blockPrefabWall;
 
-    private int currentLevelIndex = 0;
 
     void Awake()
     {
@@ -30,19 +33,23 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-    void Start()
+    public void InitializeLevel()
     {
-        if (currentLevel != null)
+        currentLevelID = PlayerPrefs.GetInt("CurrentLevelID", 1);
+        if (currentLevel != null && levelDebug)
         {
             LoadLevel(currentLevel);
         }
-        else if (allLevels.Count > 0)
-        {
-            LoadLevel(allLevels[0]);
-        }
         else
         {
-            Debug.LogError("No levels configured in LevelManager!");
+            Addressables.LoadAssetAsync<LevelConfig>($"Assets/_Project/SO/Level_{currentLevelID}.asset").Completed += handle =>
+            {
+                if (handle.Status == AsyncOperationStatus.Succeeded)
+                {
+                    currentLevel = handle.Result;
+                    LoadLevel(currentLevel);
+                }
+            };
         }
     }
 
@@ -69,7 +76,7 @@ public class LevelGenerator : MonoBehaviour
         StartCoroutine(LoadLevelCoroutine(config));
     }
 
-    private System.Collections.IEnumerator LoadLevelCoroutine(LevelConfig config)
+    private IEnumerator LoadLevelCoroutine(LevelConfig config)
     {
         yield return new WaitForSeconds(0.5f);
 
@@ -85,12 +92,25 @@ public class LevelGenerator : MonoBehaviour
             CreateBlockFromData(blockData);
         }
 
+        // Initialize game state
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.ResetMoveCount();
+            UIManager.Instance.SetLevelName(config.levelName);
+        }
+
+        // Start timer if level has time limit
+        if (TimeManager.Instance != null)
+        {
+            TimeManager.Instance.StartTimer(config.timeLimit);
+        }
+
         Debug.Log($"Level {config.levelNumber} loaded: {config.tubes.Count} tubes, {config.GetTotalLayerCount()} layers");
     }
 
     private void CreateTubeFromData(LevelConfig.TubeData tubeData)
     {
-        Tube tube = GameManager.Instance.CreateTube(tubeData.position);
+        Tube tube = GameManager.Instance.CreateTube(tubeData.tubePrefab, tubeData.position);
 
         // Create layers
         foreach (var layerData in tubeData.layers)
@@ -155,60 +175,11 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-    public void LoadNextLevel()
-    {
-        if (allLevels.Count == 0)
-        {
-            Debug.LogWarning("No levels in allLevels list!");
-            return;
-        }
-
-        currentLevelIndex++;
-
-        if (currentLevelIndex >= allLevels.Count)
-        {
-            Debug.Log("All levels completed!");
-            currentLevelIndex = 0; // Loop back to first level
-        }
-
-        LoadLevel(allLevels[currentLevelIndex]);
-    }
-
-    public void LoadPreviousLevel()
-    {
-        if (allLevels.Count == 0)
-            return;
-
-        currentLevelIndex--;
-
-        if (currentLevelIndex < 0)
-        {
-            currentLevelIndex = allLevels.Count - 1;
-        }
-
-        LoadLevel(allLevels[currentLevelIndex]);
-    }
-
     public void ReloadCurrentLevel()
     {
         if (currentLevel != null)
         {
             LoadLevel(currentLevel);
-        }
-    }
-
-    public void LoadLevelByNumber(int levelNumber)
-    {
-        LevelConfig level = allLevels.Find(l => l.levelNumber == levelNumber);
-
-        if (level != null)
-        {
-            currentLevelIndex = allLevels.IndexOf(level);
-            LoadLevel(level);
-        }
-        else
-        {
-            Debug.LogWarning($"Level {levelNumber} not found!");
         }
     }
 
@@ -220,10 +191,5 @@ public class LevelGenerator : MonoBehaviour
     public int GetCurrentLevelNumber()
     {
         return currentLevel != null ? currentLevel.levelNumber : 0;
-    }
-
-    public int GetTotalLevelCount()
-    {
-        return allLevels.Count;
     }
 }
