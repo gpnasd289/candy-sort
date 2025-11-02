@@ -49,7 +49,7 @@ MonoBehaviour:
     - color: 2
       isMystery: 0
   - tubePrefab: {fileID: 3830228103646547994, guid: 66bf01eb8d5db3942bc5098e4f3e5c33, type: 3}
-    position: {x: 1, y: 0, z: 0}
+    position: {x: 1, y: 0, z: -1}
     layers:
     - color: 4
       isMystery: 1
@@ -60,7 +60,7 @@ MonoBehaviour:
     - color: 2
       isMystery: 0
   - tubePrefab: {fileID: 3830228103646547994, guid: 66bf01eb8d5db3942bc5098e4f3e5c33, type: 3}
-    position: {x: -1, y: 0, z: -1}
+    position: {x: -1, y: 0, z: -2}
     layers:
     - color: 2
       isMystery: 0

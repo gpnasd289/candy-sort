@@ -96,12 +96,6 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if (!IsPathClear(fromTube, toTube))
-        {
-            CancelMove();
-            return;
-        }
-
         ExecuteMove(fromTube, toTube);
     }
 
@@ -131,32 +125,6 @@ public class GameManager : MonoBehaviour
                 return false;
 
             if (topLayer.layerColor != firstLayer.layerColor)
-                return false;
-        }
-
-        return true;
-    }
-
-    private bool IsPathClear(Tube fromTube, Tube toTube)
-    {
-        Vector3 start = fromTube.transform.position;
-        Vector3 end = toTube.transform.position;
-
-        // Check straight line path
-        Vector3 direction = (end - start).normalized;
-        float distance = Vector3.Distance(start, end);
-
-        RaycastHit[] hits = Physics.RaycastAll(start, direction, distance);
-
-        foreach (RaycastHit hit in hits)
-        {
-            // Check if hit a blocking object
-            if (hit.collider.CompareTag("Block"))
-                return false;
-
-            // Check if hit another tube (not the target)
-            Tube hitTube = hit.collider.GetComponent<Tube>();
-            if (hitTube != null && hitTube != toTube && hitTube != fromTube)
                 return false;
         }
 
@@ -230,12 +198,6 @@ public class GameManager : MonoBehaviour
         while (completedAnimations < layers.Count)
         {
             yield return null;
-        }
-
-        // Clear the drag line after all candies finish moving
-        if (inputController != null)
-        {
-            inputController.ClearDragLineAfterMove();
         }
 
         // Small delay before rearranging
@@ -345,7 +307,8 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Level Complete!");
 
-        levelGenerator.currentLevelID++;
+        if (levelGenerator.currentLevelID == 20) levelGenerator.currentLevelID = 1;
+        else levelGenerator.currentLevelID++;
         PlayerPrefs.SetInt("CurrentLevelID", levelGenerator.currentLevelID);
 
         // Stop timer
@@ -355,8 +318,12 @@ public class GameManager : MonoBehaviour
         }
 
         UIManager.Instance.ShowWinPanel();
+        ClearDragState();
     }
-
+    public void ClearDragState()
+    {
+        inputController.ClearDragLineAfterMove();
+    }
     public Tube CreateTube(GameObject prefab, Vector3 position)
     {
         GameObject tubeObj = Instantiate(prefab, position, Quaternion.identity);

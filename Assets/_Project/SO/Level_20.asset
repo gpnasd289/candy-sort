@@ -16,13 +16,13 @@ MonoBehaviour:
   levelName: Level 20
   levelDescription: 
   targetMoves: 0
-  timeLimit: 10
+  timeLimit: 180
   tubes:
   - tubePrefab: {fileID: 3830228103646547994, guid: 66bf01eb8d5db3942bc5098e4f3e5c33, type: 3}
-    position: {x: -0.5, y: 0, z: 3}
+    position: {x: -0.5, y: 0, z: 2}
     layers: []
   - tubePrefab: {fileID: 3830228103646547994, guid: 66bf01eb8d5db3942bc5098e4f3e5c33, type: 3}
-    position: {x: 1, y: 0, z: 3}
+    position: {x: 1, y: 0, z: 2}
     layers:
     - color: 5
       isMystery: 1
@@ -70,6 +70,6 @@ MonoBehaviour:
     - color: 5
       isMystery: 0
   blocks:
-  - position: {x: -1, y: 0, z: -1.5}
+  - position: {x: -1, y: 0, z: -1}
     scale: {x: 1, y: 1, z: 1}
     blockType: 0

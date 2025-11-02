@@ -1,17 +1,28 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
+    private List<Panel> panelList = new();
+    private Stack<Popup> popupStack = new();
+    [Header("Panel")]
+    public Panel PanelHome;
+    public Panel PanelLoading;
+    [Header("Popup")]
+    public Popup PopupWin;
+    public Popup PopupLose;
+    public Popup PopupSetting;
+    public Popup PopupHint;
+    public Popup PopupRestart;
     [Header("UI Elements")]
-    public GameObject winPanel;
-    public GameObject losePanel;
     public TextMeshProUGUI moveCountText;
     public TextMeshProUGUI levelNameText;
+    [Header("Button")]
     public Button restartButton;
     public Button undoButton;
     public Button hintButton;
@@ -29,16 +40,66 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        panelList.Add(PanelHome);
+        panelList.Add(PanelLoading);
     }
 
     void Start()
     {
         SetupButtons();
     }
+    public void ShowPopup(Popup popup, bool overlay = false)
+    {
+        if (!overlay)
+        {
+            if (popupStack.Count > 0)
+            {
+                popupStack.Peek().Close();
+            }
+        }
+
+        popupStack.Push(popup);
+        popup.Open();
+    }
+
+    public void CloseCurrentPopup()
+    {
+        Debug.Log("Closet current popup");
+        if (popupStack.Count == 0) return;
+
+        Popup top = popupStack.Pop();
+        top.Close();
+
+        if (popupStack.Count > 0)
+        {
+            popupStack.Peek().Open();
+        }
+    }
+
+    public void CloseAllPopups()
+    {
+        while (popupStack.Count > 0)
+        {
+            popupStack.Pop().Close();
+        }
+    }
+    public void ShowPanel(Panel panel)
+    {
+        foreach (var panel_item in panelList)
+        {
+            if (panel_item != panel)
+            {
+                panel_item.Close();
+            }
+            else
+            {
+                panel_item.Open();
+            }
+        }
+    }
     public void StartGame()
     {
-        HideWinPanel();
-        HideLosePanel();
+        CloseAllPopups();
     }
 
     private void SetupButtons()
@@ -86,34 +147,12 @@ public class UIManager : MonoBehaviour
 
     public void ShowWinPanel()
     {
-        if (winPanel != null)
-        {
-            winPanel.SetActive(true);
-        }
-    }
-
-    public void HideWinPanel()
-    {
-        if (winPanel != null)
-        {
-            winPanel.SetActive(false);
-        }
+        ShowPopup(PopupWin);
     }
 
     public void ShowLosePanel()
     {
-        if (losePanel != null)
-        {
-            losePanel.SetActive(true);
-        }
-    }
-
-    public void HideLosePanel()
-    {
-        if (losePanel != null)
-        {
-            losePanel.SetActive(false);
-        }
+        ShowPopup(PopupLose);
     }
 
     private void OnRestartClicked()

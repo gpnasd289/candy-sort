@@ -70,7 +70,7 @@ MonoBehaviour:
     position: {x: 0, y: 0, z: -1}
     layers: []
   - tubePrefab: {fileID: 3830228103646547994, guid: 6e234a0feafc23244a54a8113c7955a4, type: 3}
-    position: {x: 0, y: 0, z: -2}
+    position: {x: 0, y: 0, z: -2.5}
     layers:
     - color: 1
       isMystery: 0

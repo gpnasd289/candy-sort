@@ -202,6 +202,8 @@ public class TimeManager : MonoBehaviour
             UIManager.Instance.ShowMessage("Time's Up!", 2f);
         }
 
+        GameManager.Instance.ClearDragState();
+
         // Trigger level failed
         StartCoroutine(DelayedLevelFailed());
     }
@@ -214,6 +216,8 @@ public class TimeManager : MonoBehaviour
         {
             UIManager.Instance.ShowLosePanel();
         }
+
+        GameManager.Instance.ClearDragState();
     }
 
     private void PlayTickSound()

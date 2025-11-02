@@ -209,6 +209,9 @@ public class InputController : MonoBehaviour
     public void ClearDragLineAfterMove()
     {
         ClearDragLine();
+        isDragging = false;
+        dragStartTube = null;
+        currentHoverTube = null;
     }
 
     private void UpdateDragLine()

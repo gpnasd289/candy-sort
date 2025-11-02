@@ -212,15 +212,52 @@ public class Candy : MonoBehaviour
 
     private Color GetColorFromEnum(CandyColor color)
     {
+        Color newColor = new();
         switch (color)
         {
-            case CandyColor.Red: return Color.red;
-            case CandyColor.Blue: return Color.blue;
-            case CandyColor.Green: return Color.green;
-            case CandyColor.Yellow: return Color.yellow;
-            case CandyColor.Purple: return new Color(0.5f, 0f, 0.5f);
-            case CandyColor.Orange: return new Color(1f, 0.5f, 0f);
-            case CandyColor.Pink: return new Color(1f, 0.75f, 0.8f);
+            case CandyColor.Red:
+            {
+                if (ColorUtility.TryParseHtmlString("#ff0000", out newColor))
+                    return newColor;
+                else return Color.red;
+            }
+            case CandyColor.Blue: 
+                {
+                    if (ColorUtility.TryParseHtmlString("#0000ff", out newColor))
+                        return newColor;
+                    else return Color.blue;
+                } 
+            case CandyColor.Green:
+                {
+                    if (ColorUtility.TryParseHtmlString("#00ff00", out newColor))
+                        return newColor;
+                    else return Color.green;
+                }
+            case CandyColor.Yellow:
+                {
+                    if (ColorUtility.TryParseHtmlString("#ffe800", out newColor))
+                        return newColor;
+                    else return Color.yellow;
+                }
+            case CandyColor.Purple:
+                {
+                    if (ColorUtility.TryParseHtmlString("#a32ee9", out newColor))
+                        return newColor;
+                    else return new Color(0.5f, 0f, 0.5f);
+                }
+            case CandyColor.Orange:
+                {
+                    if (ColorUtility.TryParseHtmlString("#FF8024", out newColor))
+                        return newColor;
+                    else return new Color(1f, 0.5f, 0f);
+                }
+                
+            case CandyColor.Pink:
+                {
+                    if (ColorUtility.TryParseHtmlString("#f11ff8", out newColor))
+                        return newColor;
+                    else return new Color(1f, 0.75f, 0.8f);
+                }
             default: return Color.white;
         }
     }

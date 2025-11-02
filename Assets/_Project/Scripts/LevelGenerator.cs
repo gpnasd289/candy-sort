@@ -14,10 +14,7 @@ public class LevelGenerator : MonoBehaviour
     public int currentLevelID = 1;
 
     [Header("Prefab References")]
-    public GameObject blockPrefabStandard;
-    public GameObject blockPrefabLarge;
-    public GameObject blockPrefabSmall;
-    public GameObject blockPrefabWall;
+    public List<GameObject> blockPrefabs;
 
 
     void Awake()
@@ -122,11 +119,11 @@ public class LevelGenerator : MonoBehaviour
 
     private void CreateBlockFromData(LevelConfig.BlockData blockData)
     {
-        GameObject blockPrefab = GetBlockPrefab(blockData.blockType);
+        GameObject blockPrefab = GetBlockPrefab();
 
         if (blockPrefab == null)
         {
-            Debug.LogWarning($"No prefab found for block type: {blockData.blockType}");
+            Debug.LogWarning($"No prefab found");
             return;
         }
 
@@ -135,21 +132,10 @@ public class LevelGenerator : MonoBehaviour
         block.tag = "Block";
     }
 
-    private GameObject GetBlockPrefab(LevelConfig.BlockType blockType)
+    private GameObject GetBlockPrefab()
     {
-        switch (blockType)
-        {
-            case LevelConfig.BlockType.Standard:
-                return blockPrefabStandard;
-            case LevelConfig.BlockType.Large:
-                return blockPrefabLarge;
-            case LevelConfig.BlockType.Small:
-                return blockPrefabSmall;
-            case LevelConfig.BlockType.Wall:
-                return blockPrefabWall;
-            default:
-                return blockPrefabStandard;
-        }
+        int rnd = Random.Range(0, blockPrefabs.Count);
+        return blockPrefabs[rnd];
     }
 
     private void ClearCurrentLevel()

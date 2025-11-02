@@ -19,7 +19,7 @@ MonoBehaviour:
   timeLimit: 180
   tubes:
   - tubePrefab: {fileID: 3830228103646547994, guid: 66bf01eb8d5db3942bc5098e4f3e5c33, type: 3}
-    position: {x: -0.5, y: 0, z: 2}
+    position: {x: -1, y: 0, z: 2}
     layers:
     - color: 0
       isMystery: 0
@@ -34,7 +34,7 @@ MonoBehaviour:
     - color: 3
       isMystery: 0
   - tubePrefab: {fileID: 3830228103646547994, guid: 66bf01eb8d5db3942bc5098e4f3e5c33, type: 3}
-    position: {x: 1, y: 0, z: 1}
+    position: {x: 1, y: 0, z: 1.5}
     layers:
     - color: 0
       isMystery: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
     - color: 3
       isMystery: 0
   - tubePrefab: {fileID: 3830228103646547994, guid: 66bf01eb8d5db3942bc5098e4f3e5c33, type: 3}
-    position: {x: -1, y: 0, z: -1}
+    position: {x: -1, y: 0, z: -1.5}
     layers:
     - color: 3
       isMystery: 0

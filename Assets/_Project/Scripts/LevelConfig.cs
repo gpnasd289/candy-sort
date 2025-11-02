@@ -40,15 +40,6 @@ public class LevelConfig : ScriptableObject
     {
         public Vector3 position = Vector3.zero;
         public Vector3 scale = Vector3.one;
-        public BlockType blockType = BlockType.Standard;
-    }
-
-    public enum BlockType
-    {
-        Standard,
-        Large,
-        Small,
-        Wall
     }
 
     // Validation

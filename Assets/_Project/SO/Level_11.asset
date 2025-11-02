@@ -19,7 +19,7 @@ MonoBehaviour:
   timeLimit: 0
   tubes:
   - tubePrefab: {fileID: 3830228103646547994, guid: 6e234a0feafc23244a54a8113c7955a4, type: 3}
-    position: {x: -0.5, y: 0, z: 2}
+    position: {x: -0.5, y: 0, z: 1.5}
     layers:
     - color: 2
       isMystery: 1
@@ -30,7 +30,7 @@ MonoBehaviour:
     - color: 1
       isMystery: 0
   - tubePrefab: {fileID: 3830228103646547994, guid: 6e234a0feafc23244a54a8113c7955a4, type: 3}
-    position: {x: 1, y: 0, z: 0.5}
+    position: {x: 1, y: 0, z: 0}
     layers:
     - color: 3
       isMystery: 1
@@ -45,7 +45,7 @@ MonoBehaviour:
     - color: 3
       isMystery: 0
   - tubePrefab: {fileID: 3830228103646547994, guid: 6e234a0feafc23244a54a8113c7955a4, type: 3}
-    position: {x: -1, y: 0, z: -2}
+    position: {x: -1, y: 0, z: -1.5}
     layers:
     - color: 1
       isMystery: 0
@@ -60,6 +60,6 @@ MonoBehaviour:
     - color: 2
       isMystery: 0
   - tubePrefab: {fileID: 3830228103646547994, guid: 6e234a0feafc23244a54a8113c7955a4, type: 3}
-    position: {x: 0.5, y: 0, z: -3}
+    position: {x: 0.5, y: 0, z: -2.5}
     layers: []
   blocks: []
