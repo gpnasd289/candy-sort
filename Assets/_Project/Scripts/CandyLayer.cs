@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,7 +37,7 @@ public class CandyLayer : MonoBehaviour
             candy.SetLayer(this);
             candy.transform.SetParent(transform);
 
-            // Position candy in circular layout
+            // Position candy in hexagon layout
             Vector3 localPos = GetCandyLocalPosition(i);
             candy.transform.localPosition = localPos;
             candy.transform.localScale = Vector3.one * candyScale;
@@ -104,12 +105,12 @@ public class CandyLayer : MonoBehaviour
             yield return null;
         }
 
-        // Ensure final state - set all candies to normal material with correct color
+        // Set all candies to normal material with correct color
         isMystery = false;
         foreach (Candy candy in candies)
         {
             candy.SetMystery(false);
-            candy.SetColor(layerColor); // This will apply the normal material with color
+            candy.SetColor(layerColor);
         }
     }
 
@@ -123,22 +124,22 @@ public class CandyLayer : MonoBehaviour
         parentTube = tube;
     }
 
-    public void AnimateAlongBezierCurve(Vector3 bezierStart, Vector3 bezierControl1, Vector3 bezierControl2, Vector3 bezierEnd, Vector3 targetWorldPosition, System.Action onComplete = null)
+    public void AnimateAlongBezierCurve(Vector3 bezierStart, Vector3 bezierControl1, Vector3 bezierControl2, Vector3 bezierEnd, Vector3 targetWorldPosition, Action onComplete = null)
     {
         StartCoroutine(AnimateAlongBezierCurveCoroutine(bezierStart, bezierControl1, bezierControl2, bezierEnd, targetWorldPosition, onComplete));
     }
 
-    private IEnumerator AnimateAlongBezierCurveCoroutine(Vector3 bezierStart, Vector3 bezierControl1, Vector3 bezierControl2, Vector3 bezierEnd, Vector3 targetWorldPosition, System.Action onComplete)
+    private IEnumerator AnimateAlongBezierCurveCoroutine(Vector3 bezierStart, Vector3 bezierControl1, Vector3 bezierControl2, Vector3 bezierEnd, Vector3 targetWorldPosition, Action onComplete)
     {
         int completedCandies = 0;
 
-        // Detach all candies from layer BEFORE moving layer
+        // Detach all candies from layer
         foreach (Candy candy in candies)
         {
             candy.transform.SetParent(null);
         }
 
-        // NOW move layer transform to target position (candies are already detached, so they won't teleport)
+        // Move layer transform to target position
         transform.position = targetWorldPosition;
 
         // Animate each candy individually with delay and offset
@@ -150,10 +151,10 @@ public class CandyLayer : MonoBehaviour
             Vector3 exactTargetPos = transform.TransformPoint(GetCandyLocalPosition(i));
 
             // Stagger the start time for each candy
-            float delay = i * 0.05f; // 50ms delay between each candy
+            float delay = i * 0.05f; // Delay between each candy
 
             // Random offset radius for path variation
-            float offsetRadius = Random.Range(0.1f, 0.2f);
+            float offsetRadius = UnityEngine.Random.Range(0.1f, 0.2f);
 
             // Start candy animation
             candy.AnimateAlongBezierCurve(bezierStart, bezierControl1, bezierControl2, bezierEnd,

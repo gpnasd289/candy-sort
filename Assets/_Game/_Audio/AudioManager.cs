@@ -245,6 +245,10 @@ namespace Audio
         {
             return sfx.IsMute;
         }
+        public bool IsMute()
+        {
+            return sfx.IsMute || bgm.IsMute;
+        }
         public void ToggleVolume(bool isMute)
         {
             ToggleBgmVolume(isMute);
@@ -274,13 +278,7 @@ namespace Audio
         CLICK = 1,
         WIN = 2,
         LOSE = 3,
-        START_LEVEL = 4,
-        COIN = 5,
-        CLICK_BOTTLE = 6,
-        PUT_BOTTLE = 7,
-        WATER = 8,
-        CORK_CLOSE = 9,
-        SUCCESS_POTION = 10
+        CANDY_MOVED = 4
     }
 
     public enum BGM_TYPE

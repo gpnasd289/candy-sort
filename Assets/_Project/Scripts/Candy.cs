@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using Audio;
+using System;
 
 public class Candy : MonoBehaviour
 {
@@ -96,13 +98,13 @@ public class Candy : MonoBehaviour
 
     // Animate candy along bezier curve with offset
     public void AnimateAlongBezierCurve(Vector3 bezierStart, Vector3 bezierControl1, Vector3 bezierControl2, Vector3 bezierEnd,
-                                        Vector3 exactTargetPosition, float delay, float offsetRadius, System.Action onComplete = null)
+                                        Vector3 exactTargetPosition, float delay, float offsetRadius, Action onComplete = null)
     {
         StartCoroutine(AnimateBezierCoroutine(bezierStart, bezierControl1, bezierControl2, bezierEnd, exactTargetPosition, delay, offsetRadius, onComplete));
     }
 
     private IEnumerator AnimateBezierCoroutine(Vector3 bezierStart, Vector3 bezierControl1, Vector3 bezierControl2, Vector3 bezierEnd,
-                                                Vector3 exactTargetPosition, float delay, float offsetRadius, System.Action onComplete)
+                                                Vector3 exactTargetPosition, float delay, float offsetRadius, Action onComplete)
     {
         // Wait for delay
         if (delay > 0)
@@ -123,7 +125,7 @@ public class Candy : MonoBehaviour
         // Calculate perpendicular offset direction for this candy
         Vector3 pathDirection = (bezierEnd - bezierStart).normalized;
         Vector3 offsetDirection = Vector3.Cross(pathDirection, Vector3.up).normalized;
-        float offsetAngle = Random.Range(0f, 360f);
+        float offsetAngle = UnityEngine.Random.Range(0f, 360f);
         Vector3 randomOffset = Quaternion.Euler(0, offsetAngle, 0) * (offsetDirection * offsetRadius);
 
         while (elapsed < duration)
@@ -164,33 +166,7 @@ public class Candy : MonoBehaviour
 
         isMoving = false;
 
-        onComplete?.Invoke();
-    }
-
-    // Simple explosion animation
-    public void ExplodeFromPosition(Vector3 direction, float force, System.Action onComplete = null)
-    {
-        StartCoroutine(ExplodeCoroutine(direction, force, onComplete));
-    }
-
-    private IEnumerator ExplodeCoroutine(Vector3 direction, float force, System.Action onComplete)
-    {
-        Vector3 startPos = transform.position;
-        Vector3 explosionOffset = direction.normalized * force;
-
-        float explosionDuration = 0.2f;
-        float elapsed = 0f;
-
-        while (elapsed < explosionDuration)
-        {
-            elapsed += Time.deltaTime;
-            float t = elapsed / explosionDuration;
-
-            transform.position = startPos + explosionOffset * t;
-
-            yield return null;
-        }
-
+        AudioManager.Ins.PlaySfx(SFX_TYPE.CANDY_MOVED);
         onComplete?.Invoke();
     }
 

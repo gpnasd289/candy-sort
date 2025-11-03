@@ -16,7 +16,7 @@ MonoBehaviour:
   levelName: Level 10
   levelDescription: 
   targetMoves: 0
-  timeLimit: 0
+  timeLimit: 180
   tubes:
   - tubePrefab: {fileID: 3830228103646547994, guid: 6e234a0feafc23244a54a8113c7955a4, type: 3}
     position: {x: -1, y: 0, z: 1.5}

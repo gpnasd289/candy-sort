@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Tube : MonoBehaviour
 {
-    public TubeType tubeType;
     public int maxLayers = 7;
     public float layerSpacing = 0.3f;
     public Transform layerContainer;
@@ -226,10 +225,4 @@ public class Tube : MonoBehaviour
 
         return layer;
     }
-}
-
-public enum TubeType
-{
-    Open,
-    Closed
 }

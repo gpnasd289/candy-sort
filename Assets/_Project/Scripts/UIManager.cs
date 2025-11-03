@@ -1,3 +1,4 @@
+using Audio;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,37 +12,28 @@ public class UIManager : MonoBehaviour
     private List<Panel> panelList = new();
     private Stack<Popup> popupStack = new();
     [Header("Panel")]
-    public Panel PanelHome;
-    public Panel PanelLoading;
+    public PanelHome PanelHome;
     [Header("Popup")]
-    public Popup PopupWin;
-    public Popup PopupLose;
-    public Popup PopupSetting;
-    public Popup PopupHint;
-    public Popup PopupRestart;
+    public PopupWin PopupWin;
+    public PopupLose PopupLose;
+    public PopupSetting PopupSetting;
+    public PopupHint PopupHint;
+    public PopupRestart PopupRestart;
     [Header("UI Elements")]
     public TextMeshProUGUI moveCountText;
     public TextMeshProUGUI levelNameText;
     [Header("Button")]
     public Button restartButton;
-    public Button undoButton;
+    public Button homeButton;
     public Button hintButton;
-    public Button pauseButton;
+    public Button settingButton;
 
     private int moveCount = 0;
 
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Instance = this;
         panelList.Add(PanelHome);
-        panelList.Add(PanelLoading);
     }
 
     void Start()
@@ -64,7 +56,7 @@ public class UIManager : MonoBehaviour
 
     public void CloseCurrentPopup()
     {
-        Debug.Log("Closet current popup");
+        Debug.Log("Close current popup");
         if (popupStack.Count == 0) return;
 
         Popup top = popupStack.Pop();
@@ -109,9 +101,9 @@ public class UIManager : MonoBehaviour
             restartButton.onClick.AddListener(OnRestartClicked);
         }
 
-        if (undoButton != null)
+        if (homeButton != null)
         {
-            undoButton.onClick.AddListener(OnUndoClicked);
+            homeButton.onClick.AddListener(OnHomeClicked);
         }
 
         if (hintButton != null)
@@ -119,9 +111,9 @@ public class UIManager : MonoBehaviour
             hintButton.onClick.AddListener(OnHintClicked);
         }
 
-        if (pauseButton != null)
+        if (settingButton != null)
         {
-            pauseButton.onClick.AddListener(OnPauseClicked);
+            settingButton.onClick.AddListener(OnSettingClicked);
         }
     }
 
@@ -147,60 +139,54 @@ public class UIManager : MonoBehaviour
 
     public void ShowWinPanel()
     {
+        AudioManager.Ins.PlaySfx(SFX_TYPE.WIN);
         ShowPopup(PopupWin);
     }
 
     public void ShowLosePanel()
     {
+        AudioManager.Ins.PlaySfx(SFX_TYPE.LOSE);
         ShowPopup(PopupLose);
     }
 
     private void OnRestartClicked()
     {
-        // Reload current scene
-        UnityEngine.SceneManagement.SceneManager.LoadScene(
-            UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex
-        );
-    }
-
-    private void OnUndoClicked()
-    {
-        // Implement undo functionality
-        Debug.Log("Undo clicked");
-        // This would need to be connected to a move history system
-    }
-
-    private void OnHintClicked()
-    {
-        // Implement hint functionality
-        Debug.Log("Hint clicked");
-    }
-
-    private void OnPauseClicked()
-    {
-        // Toggle pause state
         if (TimeManager.Instance != null)
         {
             if (TimeManager.Instance.IsTimerActive())
             {
                 TimeManager.Instance.PauseTimer();
-                if (pauseButton != null)
-                {
-                    TextMeshProUGUI buttonText = pauseButton.GetComponentInChildren<TextMeshProUGUI>();
-                    if (buttonText != null)
-                        buttonText.text = "Resume";
-                }
-                ShowMessage("Game Paused", 1f);
+                ShowPopup(PopupRestart);
             }
-            else
+        }
+    }
+
+    private void OnHomeClicked()
+    {
+        ShowPanel(PanelHome);
+        PanelHome.StartLoading(true);
+    }
+
+    private void OnHintClicked()
+    {
+        if (TimeManager.Instance != null)
+        {
+            if (TimeManager.Instance.IsTimerActive())
             {
-                TimeManager.Instance.ResumeTimer();
-                if (pauseButton != null)
-                {
-                    TextMeshProUGUI buttonText = pauseButton.GetComponentInChildren<TextMeshProUGUI>();
-                    if (buttonText != null)
-                        buttonText.text = "Pause";
-                }
+                TimeManager.Instance.PauseTimer();
+                ShowPopup(PopupHint);
+            }
+        }
+    }
+
+    private void OnSettingClicked()
+    {
+        if (TimeManager.Instance != null)
+        {
+            if (TimeManager.Instance.IsTimerActive())
+            {
+                TimeManager.Instance.PauseTimer();
+                ShowPopup(PopupSetting);
             }
         }
     }

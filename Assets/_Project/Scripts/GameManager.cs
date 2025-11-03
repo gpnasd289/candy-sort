@@ -1,3 +1,4 @@
+using Audio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,7 +42,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
-        InitializeLevel();
+        AudioManager.Ins.PlayBgm(BGM_TYPE.HOME, 0f);
+        UIManager.Instance.ShowPanel(UIManager.Instance.PanelHome);
+        UIManager.Instance.PanelHome.StartLoading(true);
     }
 
     public void InitializeLevel()

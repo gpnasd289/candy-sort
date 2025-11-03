@@ -97,14 +97,21 @@ public class LevelGenerator : MonoBehaviour
         }
 
         // Start timer if level has time limit
-        if (TimeManager.Instance != null)
-        {
-            TimeManager.Instance.StartTimer(config.timeLimit);
-        }
+        //if (TimeManager.Instance != null)
+        //{
+        //    TimeManager.Instance.StartTimer(config.timeLimit);
+        //}
 
         Debug.Log($"Level {config.levelNumber} loaded: {config.tubes.Count} tubes, {config.GetTotalLayerCount()} layers");
     }
-
+    public void StartTimer()
+    {
+        // Start timer if level has time limit
+        if (TimeManager.Instance != null)
+        {
+            TimeManager.Instance.StartTimer(currentLevel.timeLimit);
+        }
+    }
     private void CreateTubeFromData(LevelConfig.TubeData tubeData)
     {
         Tube tube = GameManager.Instance.CreateTube(tubeData.tubePrefab, tubeData.position);
